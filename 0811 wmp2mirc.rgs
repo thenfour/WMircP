@@ -1,0 +1,34 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {EB7DACFF-8854-427D-AC59-F66AF79179BC} = s 'WMircP Class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}
+HKEY_LOCAL_MACHINE
+{
+    NoRemove SOFTWARE
+    {
+        NoRemove Microsoft
+        {
+            NoRemove MediaPlayer
+            {
+                NoRemove UIPlugins
+                {
+                    ForceRemove {EB7DACFF-8854-427D-AC59-F66AF79179BC}
+                    {
+                        val FriendlyName = s 'WMircP'
+                        val Description = s 'mIRC now playing plug-in'
+                        val Capabilities = d '3758096385'
+                    }
+                }
+            }
+        }
+    }
+}

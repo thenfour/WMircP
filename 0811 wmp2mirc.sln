@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0811 wmp2mirc", "0811 wmp2mirc.vcproj", "{DC996560-DF69-438C-BAC7-8C95C0B2825B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tester", "tester\tester.vcproj", "{778ABA7F-2ADC-4C14-9755-680E5EC6606A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC996560-DF69-438C-BAC7-8C95C0B2825B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DC996560-DF69-438C-BAC7-8C95C0B2825B}.Debug|Win32.Build.0 = Debug|Win32
+		{DC996560-DF69-438C-BAC7-8C95C0B2825B}.Release|Win32.ActiveCfg = Release|Win32
+		{DC996560-DF69-438C-BAC7-8C95C0B2825B}.Release|Win32.Build.0 = Release|Win32
+		{778ABA7F-2ADC-4C14-9755-680E5EC6606A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{778ABA7F-2ADC-4C14-9755-680E5EC6606A}.Debug|Win32.Build.0 = Debug|Win32
+		{778ABA7F-2ADC-4C14-9755-680E5EC6606A}.Release|Win32.ActiveCfg = Release|Win32
+		{778ABA7F-2ADC-4C14-9755-680E5EC6606A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

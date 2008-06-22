@@ -1,0 +1,9 @@
+; 0811 wmp2mirc.def : Declares the module parameters.
+
+LIBRARY      "0811 WMP2MIRC.DLL"
+
+EXPORTS
+	DllCanUnloadNow     PRIVATE
+	DllGetClassObject   PRIVATE
+	DllRegisterServer   PRIVATE
+	DllUnregisterServer	PRIVATE
