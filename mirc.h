@@ -3,7 +3,7 @@
 
 #include <string>
 #include <map>
-#include <libcc\ccstr.h>
+#include "..\libcc\libcc\stringutil.hpp"
 #include "ddemirc.h"
 
 // RAII critsec class

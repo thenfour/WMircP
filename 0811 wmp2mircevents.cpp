@@ -9,7 +9,8 @@
 #include "stdafx.h"
 #include "0811 wmp2mirc.h"
 #include "meat.h"
-#include "DebugLog.h"
+#include "..\libcc\libcc\log.hpp"
+
 
 
 void CWmp2mirc::OnPlay()
@@ -17,7 +18,7 @@ void CWmp2mirc::OnPlay()
   // if we are locked (property page could be doing stuff, or the timer proc), then just ignore the request.
   if(!m_cs.TryEnter())
   {
-    g_pLog->Message(_T("WMircP is busy; ignoring the play event."));
+    LibCC::g_pLog->Message(_T("WMircP is busy; ignoring the play event."));
     return;
   }
 
@@ -26,18 +27,16 @@ void CWmp2mirc::OnPlay()
 
   if(!pMedia)
   {
-    g_pLog->Message(_T("WMircP could not get a pointer to the current media."));
+    LibCC::g_pLog->Message(_T("WMircP could not get a pointer to the current media."));
   }
   else
   {
     CComBSTR url;
     pMedia->get_sourceURL(&url);
 
-    g_pLog->Message(LibCC::Format("OnPlay %").qs((BSTR)url));
-    g_pLog->Indent();
+		LibCC::LogScopeMessage lsm(LibCC::Format("OnPlay %").qs((BSTR)url).Str());
     m.OnPlay(pMedia, (PCWSTR)url);
     pMedia->Release();
-    g_pLog->Outdent();
   }
 
   m_cs.Leave();

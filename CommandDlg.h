@@ -180,7 +180,7 @@ public:
 
     handled = TRUE;
     std::list<std::wstring> cmd;
-    LibCC::StringSplit(GetDlgItemText(IDC_COMMAND), L"\r\n", std::back_inserter(cmd));
+    LibCC::StringSplitByString(GetDlgItemText(IDC_COMMAND), L"\r\n", std::back_inserter(cmd));
     m_copy.Commands(cmd);
 
     if(m_pMedia)

@@ -3,7 +3,7 @@
 #include "0811 wmp2mirc.h"
 #include "CPropertyDialog.h"
 
-LogWindow* g_pLog;
+LibCC::Log* LibCC::g_pLog = 0;
 
 CWmp2mirc::CWmp2mirc() :
   m_dwAdviseCookie(0),
@@ -27,8 +27,14 @@ HRESULT CWmp2mirc::FinalConstruct()
   icc.dwICC = ICC_LISTVIEW_CLASSES;
   InitCommonControlsEx(&icc);
 
-  g_pLog = &m_log;
-  g_pLog->Create(_T("WMircP"), _T("WMircP"), _Module.GetModuleInstance());
+#ifdef _DEBUG
+	bool debug = true;
+#else
+	bool debug = false;
+#endif
+
+	LibCC::g_pLog = &m_log;
+  LibCC::g_pLog->Create(L"WMircP", _Module.GetModuleInstance(), debug, debug, true, true, false, true);
 
   return S_OK;
 }
@@ -36,8 +42,8 @@ HRESULT CWmp2mirc::FinalConstruct()
 void CWmp2mirc::FinalRelease()
 {
   ReleaseCore();
-  g_pLog->Destroy();
-  g_pLog = 0;
+  LibCC::g_pLog->Destroy();
+  LibCC::g_pLog = 0;
 }
 
 HRESULT CWmp2mirc::SetCore(IWMPCore *pCore)

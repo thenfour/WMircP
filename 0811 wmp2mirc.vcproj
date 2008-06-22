@@ -63,6 +63,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				RegisterOutput="true"
+				OutputFile="$(OutDir)\WMircP.dll"
 				LinkDLL="true"
 				ModuleDefinitionFile="0811 wmp2mirc.def"
 				GenerateDebugInformation="true"
@@ -139,6 +140,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				RegisterOutput="true"
+				OutputFile="$(OutDir)\WMircP.dll"
 				LinkDLL="true"
 				ModuleDefinitionFile="0811 wmp2mirc.def"
 				GenerateDebugInformation="true"
@@ -198,10 +200,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DebugLog.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\StdAfx.cpp"
 				>
 				<FileConfiguration
@@ -245,10 +243,6 @@
 			</File>
 			<File
 				RelativePath=".\ddemirc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\DebugLog.h"
 				>
 			</File>
 			<File

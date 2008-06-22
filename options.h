@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include <libcc\registry.h>
+#include "..\libcc\libcc\registry.hpp"
 #include <map>
 #include <list>
 #include <string>
-
+#include <algorithm>
 
 #define APP_NAME L"WMircP"
 
@@ -100,7 +100,7 @@ public:
     myk[L"m_allowFilter"].GetValue(m_allowFilter);
     std::wstring cmd;
     myk[L"m_commands"].GetValue(cmd);
-    LibCC::StringSplit(cmd, L"\r\n", std::back_inserter(m_commands));
+    LibCC::StringSplitByString(cmd, L"\r\n", std::back_inserter(m_commands));
 
     // now load filters
     for(LibCC::RegistryKeyW::SubKeyIterator it = myk.EnumSubKeysBegin(); it != myk.EnumSubKeysEnd(); ++ it)

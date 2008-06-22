@@ -14,10 +14,10 @@
 #include "resource.h"
 #include "wmpplug.h"
 #include <string>
-#include <libcc\fps.h>
+#include "..\libcc\libcc\timer.hpp"
+#include "..\libcc\libcc\log.hpp"
 #include <vector>
 #include "meat.h"
-#include "DebugLog.h"
 
 // {EB7DACFF-8854-427D-AC59-F66AF79179BC}
 DEFINE_GUID(CLSID_Wmp2mirc, 0xeb7dacff, 0x8854, 0x427d, 0xac, 0x59, 0xf6, 0x6a, 0xf7, 0x91, 0x79, 0xbc);
@@ -120,7 +120,7 @@ private:
   DWORD m_dwAdviseCookie;
 
   HWND m_hWnd;
-  LogWindow m_log;
+	LibCC::Log m_log;
 };
 
 #endif //__WMP2MIRC_H_

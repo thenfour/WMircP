@@ -3,7 +3,7 @@
 #pragma once
 
 #include "mirc.h"
-#include "DebugLog.h"
+#include "..\libcc\libcc\log.hpp"
 #include "options.h"
 #include <mmsystem.h>
 
@@ -34,7 +34,7 @@ public:
   {
     if(!m_spec.Enabled())
     {
-      g_pLog->Message(_T("Command is disabled; ignoring."));
+			LibCC::g_pLog->Message(_T("Command is disabled; ignoring."));
       return;
     }
 
@@ -49,7 +49,7 @@ public:
         std::wstring val = mi.GetAttribute(it->Attribute());
         if(FALSE == PathMatchSpec(val.c_str(), it->Matches().c_str()))
         {
-          g_pLog->Message(LibCC::Format("Bailing because of filtering.  Attribute % is %, and does not meet your criteria: %")
+          LibCC::g_pLog->Message(LibCC::Format("Bailing because of filtering.  Attribute % is %, and does not meet your criteria: %")
             .qs(it->Attribute())
             .qs(val)
             .qs(it->Matches()));
@@ -69,17 +69,17 @@ public:
       }
       if(ignore)
       {
-        g_pLog->Message(LibCC::Format("Ignoring commented command %").qs(*it));
+        LibCC::g_pLog->Message(LibCC::Format("Ignoring commented command %").qs(*it));
       }
       else
       {
-        g_pLog->Message(LibCC::Format("Transforming command %").qs(*it));
+        LibCC::g_pLog->Message(LibCC::Format("Transforming command %").qs(*it));
         *it = mirc::ProcessCommandString(mi, *it);
       }
     }
     // queue it up for processing.
     UINT ms = m_spec.Delay() * 1000;
-    g_pLog->Message(LibCC::Format("Setting the timer for % milliseconds").ui(ms+1));
+    LibCC::g_pLog->Message(LibCC::Format("Setting the timer for % milliseconds").ui(ms+1));
     m_timerID = timeSetEvent(ms+1,
       max(100,ms+1), DelayProc, (DWORD_PTR)this, TIME_ONESHOT | TIME_KILL_SYNCHRONOUS | TIME_CALLBACK_FUNCTION);
   }
@@ -93,36 +93,30 @@ private:
   {
     Command& This(*((Command*)dwUser));
     CriticalSection::ScopeLock l(This.m_cs);
-
-    g_pLog->Message(LibCC::Format("Timer proc for %").qs(This.m_spec.Name()));
-    g_pLog->Indent();
+		LibCC::LogScopeMessage lsm(LibCC::Format("Timer proc for %").qs(This.m_spec.Name()).Str());
 
     // skip it if it's happening too fast.
     if(This.m_spec.AllowInterval() && !This.m_firstPlay && (This.m_timer.GetTimeSinceLastTick() < This.m_spec.Interval()))
     {
-      g_pLog->Message(_T("Minimum interval not set; bailing."));
-      g_pLog->Outdent();
+      LibCC::g_pLog->Message(_T("Minimum interval not set; bailing."));
       return;
     }
 
     // no-repeat?
     if(!This.m_spec.AllowRepeats() && (This.m_currentURL == This.m_lastURL))
     {
-      g_pLog->Message(_T("This is a repeat; bailing."));
-      g_pLog->Outdent();
+      LibCC::g_pLog->Message(_T("This is a repeat; bailing."));
       return;
     }
 
     for(std::list<std::wstring>::iterator it = This.m_currentCommands.begin(); it != This.m_currentCommands.end(); ++ it)
     {
-      g_pLog->Message(LibCC::Format("Sending mIRC command %").qs(*it));
+      LibCC::g_pLog->Message(LibCC::Format("Sending mIRC command %").qs(*it));
       mirc::SendMircCommand(*it);
     }
     This.m_timer.Tick();
     This.m_firstPlay = false;
     This.m_lastURL = This.m_currentURL;
-
-    g_pLog->Outdent();
   }
 
   CriticalSection& m_cs;
@@ -160,17 +154,15 @@ public:
   {
     if(!m_options.Enabled())
     {
-      g_pLog->Message(_T("WMircP is disabled; Ignoring the event completely."));
+      LibCC::g_pLog->Message(_T("WMircP is disabled; Ignoring the event completely."));
     }
     else
     {
-      g_pLog->Message(LibCC::Format("Starting to process % commands").i((int)m_commands.size()));
+      LibCC::g_pLog->Message(LibCC::Format("Starting to process % commands").i((int)m_commands.size()));
       for(std::list<Command>::iterator it = m_commands.begin(); it != m_commands.end(); ++ it)
       {
-        g_pLog->Message(LibCC::Format("Processing %").qs(it->m_spec.Name()));
-        g_pLog->Indent();
+				LibCC::LogScopeMessage lsm(LibCC::Format("Processing %").qs(it->m_spec.Name()).Str());
         it->OnPlay(pMedia, URL, m_options.DDEServer());
-        g_pLog->Outdent();
       }
     }
   }
