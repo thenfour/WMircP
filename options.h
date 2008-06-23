@@ -8,7 +8,11 @@
 #include <string>
 #include <algorithm>
 
-#define APP_NAME L"WMircP"
+#ifdef TARGET_FOOBAR
+#	define APP_NAME L"foobarMircP"
+#else
+#	define APP_NAME L"WMircP"
+#endif
 
 
 class IOptionsID

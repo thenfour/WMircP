@@ -23,6 +23,17 @@
 DEFINE_GUID(CLSID_Wmp2mirc, 0xeb7dacff, 0x8854, 0x427d, 0xac, 0x59, 0xf6, 0x6a, 0xf7, 0x91, 0x79, 0xbc);
 
 
+struct __declspec(uuid("865DCA0D-4493-4392-9B52-09D2986008EF"))
+IFooBarMirc :
+	public IUnknown
+{
+	virtual void SetEventHandler(IWMPEvents* p) = 0;
+	virtual HRESULT __stdcall QueryInterface(const IID &,void **) = 0;
+	virtual ULONG __stdcall AddRef(void) = 0;
+	virtual ULONG __stdcall Release(void) = 0;
+};
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CWmp2mirc
 class ATL_NO_VTABLE CWmp2mirc : 
@@ -115,12 +126,14 @@ private:
 
   CriticalSection m_cs;// protects the meat.
 
+	CComPtr<IFooBarMirc> m_foobarPlugin;
+
   CComPtr<IWMPCore> m_spCore;
   CComPtr<IConnectionPoint> m_spConnectionPoint;
   DWORD m_dwAdviseCookie;
 
   HWND m_hWnd;
-	LibCC::Log m_log;
+	LibCC::LogReference m_log;
 };
 
 #endif //__WMP2MIRC_H_

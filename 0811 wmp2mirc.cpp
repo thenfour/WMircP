@@ -5,6 +5,12 @@
 
 LibCC::Log* LibCC::g_pLog = 0;
 
+
+//// {865DCA0D-4493-4392-9B52-09D2986008EF}
+//static const IID IID_FooBarMirc =
+//{ 0x865dca0d, 0x4493, 0x4392, { 0x9b, 0x52, 0x09, 0xd2, 0x98, 0x60, 0x08, 0xef } };
+//
+
 CWmp2mirc::CWmp2mirc() :
   m_dwAdviseCookie(0),
   m(m_cs)
@@ -33,17 +39,13 @@ HRESULT CWmp2mirc::FinalConstruct()
 	bool debug = false;
 #endif
 
-	LibCC::g_pLog = &m_log;
-  LibCC::g_pLog->Create(L"WMircP", _Module.GetModuleInstance(), debug, debug, true, true, false, true);
-
+  m_log.Create(L"WMircP.log", _Module.GetModuleInstance(), debug, debug, true, true, false, true);
   return S_OK;
 }
 
 void CWmp2mirc::FinalRelease()
 {
   ReleaseCore();
-  LibCC::g_pLog->Destroy();
-  LibCC::g_pLog = 0;
 }
 
 HRESULT CWmp2mirc::SetCore(IWMPCore *pCore)
@@ -62,23 +64,32 @@ HRESULT CWmp2mirc::SetCore(IWMPCore *pCore)
 
   m_spCore = pCore;
 
-  // connect up the event interface
-  CComPtr<IConnectionPointContainer>  spConnectionContainer;
-  hr = m_spCore->QueryInterface( &spConnectionContainer );
-  if (SUCCEEDED(hr))
-  {
-    hr = spConnectionContainer->FindConnectionPoint( __uuidof(IWMPEvents), &m_spConnectionPoint );
-  }
+  // connect up the event interface. we hook it up either the simple way (if this is the foobar plugin), or the complex COM event sink way (for WMP)
 
-  if (SUCCEEDED(hr))
-  {
-    hr = m_spConnectionPoint->Advise( GetUnknown(), &m_dwAdviseCookie );
+  hr = m_spCore.QueryInterface(&m_foobarPlugin);
+	if(SUCCEEDED(hr))
+	{
+		m_foobarPlugin->SetEventHandler(this);
+	}
+	else
+	{
+		CComPtr<IConnectionPointContainer>  spConnectionContainer;
+		hr = m_spCore->QueryInterface( &spConnectionContainer );
+		if (SUCCEEDED(hr))
+		{
+			hr = spConnectionContainer->FindConnectionPoint( __uuidof(IWMPEvents), &m_spConnectionPoint );
+		}
 
-    if ((FAILED(hr)) || (0 == m_dwAdviseCookie))
-    {
-      m_spConnectionPoint = NULL;
-    }
-  }
+		if (SUCCEEDED(hr))
+		{
+			hr = m_spConnectionPoint->Advise( GetUnknown(), &m_dwAdviseCookie );
+
+			if ((FAILED(hr)) || (0 == m_dwAdviseCookie))
+			{
+				m_spConnectionPoint = NULL;
+			}
+		}
+	}
   return hr;
 }
 

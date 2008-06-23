@@ -1,5 +1,8 @@
 @echo off
-pushd "~dp0"
-copy "SDK-2008-05-27\Debug\foo_foobarMircP.*" "%programfiles%\foobar2000\components"
+pushd "%~dp0"
+@echo on
+copy "foobar2000\components\foo_WMircP.dll" "%programfiles%\foobar2000\components"
+copy "foobar2000\components\foo_WMircP.pdb" "%programfiles%\foobar2000\components"
+@echo off
 popd
 pause

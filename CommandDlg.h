@@ -166,6 +166,8 @@ public:
           i.iItem = ListView_GetItemCount(h);
           int iItem = ListView_InsertItem(h, &i);
           ListView_SetItemText(h, iItem, 1, const_cast<PWSTR>(it->second.c_str()));
+
+					//LibCC::g_pLog->Message(LibCC::Format("%\t%")(it->first)(it->second).Str());
         }
       }
     }

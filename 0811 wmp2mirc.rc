@@ -60,15 +60,12 @@ IDR_WMP2MIRC            REGISTRY                "0811 wmp2mirc.rgs"
 //
 
 IDD_PROPERTYDIALOG DIALOGEX 0, 0, 241, 230
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "WMircP properties"
 FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     EDITTEXT        IDC_DDESERVER,16,30,155,14,ES_AUTOHSCROLL
-    CONTROL         "",IDC_COMMANDLIST,"SysListView32",LVS_REPORT | 
-                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | 
-                    WS_BORDER | WS_TABSTOP,16,114,155,65
+    CONTROL         "",IDC_COMMANDLIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,16,114,155,65
     PUSHBUTTON      "New",IDC_NEWCOMMAND,16,183,50,14
     PUSHBUTTON      "Delete",IDC_DELETECOMMAND,70,183,50,14
     PUSHBUTTON      "Edit",IDC_EDITCOMMAND,124,183,50,14
@@ -76,42 +73,30 @@ BEGIN
     PUSHBUTTON      "Move down",IDC_MOVEDOWN,175,132,50,14
     DEFPUSHBUTTON   "OK",IDOK,130,208,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,184,208,50,14
-    LTEXT           "DDE server (default is ""mIRC"")",IDC_STATIC,16,18,101,
-                    8
+    LTEXT           "DDE server (default is ""mIRC"")",IDC_STATIC,16,18,101,8
     GROUPBOX        "mIRC",IDC_STATIC,7,7,227,44
     GROUPBOX        "Commands",IDC_STATIC,7,103,227,101
     GROUPBOX        "General",IDC_STATIC,7,55,227,44
-    CONTROL         "Show tray icon",IDC_SHOWTRAYICON,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,16,66,63,10
-    CONTROL         "Enable WMircP",IDC_ENABLE,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,16,80,63,10
+    CONTROL         "Show tray icon",IDC_SHOWTRAYICON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,66,63,10
+    CONTROL         "Enable WMircP",IDC_ENABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,80,63,10
 END
 
 IDD_COMMAND DIALOGEX 0, 0, 497, 327
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "WMircP command properties"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     EDITTEXT        IDC_NAME,54,7,97,14,ES_AUTOHSCROLL
-    CONTROL         "Name it for me",IDC_NAMEITFORME,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,155,9,63,10
-    EDITTEXT        IDC_COMMAND,16,46,220,38,ES_MULTILINE | ES_AUTOVSCROLL | 
-                    ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
-    CONTROL         "Allow issuance for repeated songs",IDC_REPEAT,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,16,89,125,10
+    CONTROL         "Name it for me",IDC_NAMEITFORME,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,155,9,63,10
+    EDITTEXT        IDC_COMMAND,16,46,220,38,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_HSCROLL
+    CONTROL         "Allow issuance for repeated songs",IDC_REPEAT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,89,125,10
     CONTROL         "Minimum time between issuances",IDC_ALLOWINTERVAL,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,102,121,10
-    EDITTEXT        IDC_MINIMUMINTERVAL,26,115,37,14,ES_AUTOHSCROLL | 
-                    ES_NUMBER
-    LTEXT           "Delay from beginning of song until issuance",IDC_STATIC,
-                    16,134,139,8
+    EDITTEXT        IDC_MINIMUMINTERVAL,26,115,37,14,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Delay from beginning of song until issuance",IDC_STATIC,16,134,139,8
     EDITTEXT        IDC_DELAY,16,145,37,14,ES_AUTOHSCROLL | ES_NUMBER
-    CONTROL         "Enable filtering",IDC_ALLOWFILTER,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,16,181,63,10
-    CONTROL         "",IDC_FILTERS,"SysListView32",LVS_REPORT | 
-                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
-                    WS_TABSTOP,26,194,210,46
+    CONTROL         "Enable filtering",IDC_ALLOWFILTER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,16,181,63,10
+    CONTROL         "",IDC_FILTERS,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,26,194,210,46
     EDITTEXT        IDC_FILTERKEY,26,243,119,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_FILTER,26,262,119,14,ES_AUTOHSCROLL
     PUSHBUTTON      "New",IDC_NEWFILTER,26,280,50,14
@@ -122,24 +107,16 @@ BEGIN
     LTEXT           "seconds",IDC_STATIC,67,118,27,8
     LTEXT           "seconds",IDC_STATIC,57,147,27,8
     LTEXT           "Attribute name ",IDC_STATIC,149,246,51,8
-    LTEXT           "Example attributes (based on currently playing media)",
-                    IDC_STATIC,255,137,174,8
+    LTEXT           "Example attributes (based on currently playing media)",IDC_STATIC,255,137,174,8
     GROUPBOX        "Filtering",IDC_STATIC,7,170,238,131
     GROUPBOX        "General",IDC_STATIC,7,25,238,141
-    LTEXT           "Command text (use multiple lines for multiple commands)",
-                    IDC_STATIC,16,35,185,8
+    LTEXT           "Command text (use multiple lines for multiple commands)",IDC_STATIC,16,35,185,8
     LTEXT           "Name",IDC_STATIC,7,9,40,8,0,WS_EX_RIGHT
     LTEXT           "Matching strings",IDC_STATIC,149,264,72,8
-    CONTROL         "",IDC_ATTRIBUTELIST,"SysListView32",LVS_REPORT | 
-                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
-                    WS_TABSTOP,249,145,241,156
-    LTEXT           "Example output (based on currently playing media)",
-                    IDC_STATIC,249,25,164,8
-    CONTROL         "",IDC_EXAMPLEOUTPUT,"SysListView32",LVS_REPORT | 
-                    LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | 
-                    WS_TABSTOP,249,35,241,98
-    CONTROL         "Enabled?",IDC_ENABLED,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,249,9,45,10
+    CONTROL         "",IDC_ATTRIBUTELIST,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,249,145,241,156
+    LTEXT           "Example output (based on currently playing media)",IDC_STATIC,249,25,164,8
+    CONTROL         "",IDC_EXAMPLEOUTPUT,"SysListView32",LVS_REPORT | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,249,35,241,98
+    CONTROL         "Enabled?",IDC_ENABLED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,249,9,45,10
     PUSHBUTTON      "Help",IDC_HELPBLAH,7,305,50,14
 END
 
@@ -190,6 +167,40 @@ BEGIN
     END
 END
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "WMircP and foobarMircP - ""Now Playing"" plugins for WMP and foobar2000"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
 
 
 /////////////////////////////////////////////////////////////////////////////
