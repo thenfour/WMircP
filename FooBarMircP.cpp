@@ -423,16 +423,15 @@ struct FooBarMircApp
 	FooBarMircApp()
 	{
 	  CoInitialize(0);
-    CoCreateInstance(CLSID_Wmp2mirc, 0, CLSCTX_INPROC_SERVER, __uuidof(IWMPPluginUI), (VOID**)&plugin);
-		plugin->SetCore(&adapter);
+		
+    //CoCreateInstance(CLSID_Wmp2mirc, 0, CLSCTX_INPROC_SERVER, __uuidof(IWMPPluginUI), (VOID**)&plugin);
+		plugin.SetCore(&adapter);
 	}
 	~FooBarMircApp()
 	{
-		plugin->Release();
-		plugin = 0;
 		CoUninitialize();
 	}
-	IWMPPluginUI* plugin;
+	CComObject<CWmp2mirc> plugin;
 	FooBarCore adapter;
 };
 
@@ -513,7 +512,7 @@ class mainmenu_commands_tutorial1 :
 	{
 		if (p_index == 0 && core_api::assert_main_thread())
 		{
-			g_instance->plugin->DisplayPropertyPage(core_api::get_main_window());
+			g_instance->plugin.DisplayPropertyPage(core_api::get_main_window());
 		}
 	}
 
