@@ -123,7 +123,12 @@ struct FooBarCore :
 	FooBarMedia m;
 	FooBarCore() : m_events(0)
 	{
-		m_log.Create(L"foobarMircP.log", core_api::get_my_instance(), true, true, true, true, false, true);
+#ifdef _DEBUG
+		bool debug = true;
+#else
+		bool debug = false;
+#endif
+		m_log.Create(L"foobarMircP.log", core_api::get_my_instance(), debug, debug, true, true, false, true);
 
 		static_api_ptr_t<play_callback_manager>()->register_callback(this,
 			flag_on_playback_new_track |
